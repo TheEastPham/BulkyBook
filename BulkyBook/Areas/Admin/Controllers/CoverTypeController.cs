@@ -57,7 +57,7 @@ namespace BulkyBook.Areas.Admin.Controllers
                 if (coverType.Id == 0)
                 {
                     _unitOfWork.SP_Call.Execute(SD.Proc_CoverType_Create, parameter);
-
+                    
                 }
                 else
                 {
@@ -76,7 +76,7 @@ namespace BulkyBook.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var allObj = _unitOfWork.SP_Call.List<CoverType>(SD.Proc_CoverType_GetAll, null);
+            var allObj = _unitOfWork.SP_Call.List<CoverType>(SD.Proc_CoverType_GetAll,null);
             return Json(new { data = allObj });
         }
 
@@ -85,7 +85,7 @@ namespace BulkyBook.Areas.Admin.Controllers
         {
             var parameter = new DynamicParameters();
             parameter.Add("@Id", id);
-            var objFromDb = _unitOfWork.SP_Call.OneRecord<CoverType>(SD.Proc_CoverType_Get, parameter);
+            var objFromDb = _unitOfWork.SP_Call.OneRecord<CoverType>(SD.Proc_CoverType_Get,parameter);
             if (objFromDb == null)
             {
                 return Json(new { success = false, message = "Error while deleting" });
